@@ -7,6 +7,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { MdCode } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa6";
 import { useEffect, useState } from "react";
+import SkeletonDocs from "@/components/content/Skeleton";
 
 export default function DocsPage() {
   const { slug } = useParams();
@@ -16,27 +17,56 @@ export default function DocsPage() {
   const DemoComponent = Demos?.[component.demo];
   const [demoCode, setDemoCode] = useState("");
   const [codeSource, setCodeSource] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   // Load demo code via raw-loader
   useEffect(() => {
     const loadCode = async () => {
-      const code = await import(
-        `@/components/content/demos/${component.demo}.jsx?raw`
-      );
-      setDemoCode(code.default);
+      try {
+        const code = await import(
+          `@/components/content/demos/${component.demo}.jsx?raw`
+        );
+        setDemoCode(code.default);
+      } catch (error) {
+        console.error("Error loading demo code:", error);
+        setDemoCode("");
+      }
     };
     loadCode();
   }, [component.demo]);
+
   // Load source code via raw-loader
   useEffect(() => {
     const loadSourceCode = async () => {
-      const code = await import(
-        `@/components/content/demos/${component.source}.jsx?raw`
-      );
-      setCodeSource(code.default);
+      try {
+        const code = await import(
+          `@/components/content/demos/${component.source}.jsx?raw`
+        );
+        setCodeSource(code.default);
+      } catch (error) {
+        console.error("Error loading source code:", error);
+        setCodeSource("");
+      }
     };
     loadSourceCode();
   }, [component.source]);
+
+  // Check if all data is loaded before rendering
+  useEffect(() => {
+    if (demoCode && codeSource && DemoComponent) {
+      // Simulate loading time
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 100);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [demoCode, codeSource, DemoComponent]);
+
+  // Render skeleton while loading
+  if (isLoading) {
+    return <SkeletonDocs className="w-full" />;
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 text-white mt-20">
