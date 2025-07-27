@@ -10,7 +10,7 @@ export default function DocsNavbar() {
           href="/"
           className="flex items-center gap-2 text-2xl justify-self-start"
         >
-          <FaGithub /> <span className="hidden md:flex">BitElements</span>
+          <img src="/bitelements.png" alt="logo-bitelements" className="w-[150px]" />
         </Link>
         <ul className="flex space-x-4 items-center md:pr-25">
           <li className="hover:bg-zinc-800/80 px-4 py-2 rounded-md text-sm">
