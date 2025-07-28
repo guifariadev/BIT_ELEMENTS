@@ -13,16 +13,18 @@ export default function Footer() {
         <div>
           <h4 className="font-bold mb-4">Resources</h4>  
           <ul className="space-y-4">
-            <Link href="/">
+            <Link href="/docs">
               <li className="text-zinc-400 text-sm transition hover:opacity-70 cursor-pointer">Docs</li>
             </Link>
-            <li className="text-zinc-400 text-sm hover:opacity-70 cursor-pointer"> <a target="_blank" href="https://github.com">Github</a></li>
+            <li className="text-zinc-400 text-sm hover:opacity-70 cursor-pointer"> <a target="_blank" href="https://github.com/guifariadev/BIT_ELEMENTS">Github</a></li>
           </ul>
         </div>
         <div>
           <h4 className="font-bold mb-4">Feedback</h4>  
           <ul className="space-y-4">
-            <li className="text-zinc-400 text-sm transition hover:opacity-70 cursor-pointer">Talk to us</li>
+            <Link href="/feedback">
+              <li className="text-zinc-400 text-sm transition hover:opacity-70 cursor-pointer">Talk to us</li>
+            </Link>
           </ul>
         </div>
       </div>
